@@ -3,6 +3,8 @@ from setuptools import setup, find_packages
 requirements = [
     "fsspec",
     "tqdm",
+    "requests",
+    "aiohttp",
 ]
 
 setup(

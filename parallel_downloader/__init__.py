@@ -24,7 +24,8 @@ def download(uri, dst_dir, filter=None, parallel=3, retry=True, buffer_size=1024
     with ThreadPoolExecutor(max_workers=parallel) as executor:
         futures = dict()
         for f in files:
-            remote_path = f"{server}/{f['name']}"
+            file_path = urlparse(f).path
+            remote_path = f"{server}/{file_path}"
             if type(filter) is str:
                 if filter not in remote_path:
                     continue
