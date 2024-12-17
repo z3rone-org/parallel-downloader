@@ -38,6 +38,7 @@ def download(uri, dst_dir, filter=None, parallel=3, retry=True, buffer_size=1024
                 )
 
         while len(futures) > 0:
+            new_futures = futures.copy()
             for remote_path, future in futures.items():
                 if future.done():
                     error=future.exception()
@@ -54,6 +55,7 @@ def download(uri, dst_dir, filter=None, parallel=3, retry=True, buffer_size=1024
                             logger.error(f'FAILED {remote_path}')
                         logger.error(error)
                     else:
-                        del futures[remote_path]
+                        del new_futures[remote_path]
                         logger.info(f'DONE {remote_path}')
+            futures = new_futures
             sleep(1)
