@@ -52,6 +52,7 @@ def download(uri, dst_dir, filter=None, parallel=3, retry=True, buffer_size=1024
                             logger.warning(f'RETRY {remote_path}')
                         else:
                             logger.error(f'FAILED {remote_path}')
+                            del future[remote_path]
                         logger.error(error)
                     else:
                         del future[remote_path]
